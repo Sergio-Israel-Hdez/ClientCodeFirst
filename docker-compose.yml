@@ -1,0 +1,36 @@
+﻿
+  version: "3.8"
+  services:
+    mysql:
+      image: mysql/mysql-server
+      command: --default-authentication-plugin=mysql_native_password
+      volumes:
+        - mysql-data:/var/lib/mysql
+      restart: always
+      ports:
+        - "127.0.0.2:3309:3306"  # Puertos: [IP_Host]:Puerto_Host:Puerto_Contenedor
+      networks: 
+        - my-network-mysql
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_USER: userinfo
+        MYSQL_PASSWORD: admin
+        MYSQL_TCP_PORT: 3306
+        MYSQL_DATABASE: clientcodedb
+    clientcodefirst:
+      restart: always
+      depends_on:
+        mysql:
+          condition: service_started
+      image: clientcodefirst
+      build:
+        context: .
+        dockerfile: ClientCodeFirst/Dockerfile
+      ports:
+        - 5091:5091
+      networks:
+        - my-network-mysql
+  networks:
+    my-network-mysql:
+  volumes:
+    mysql-data:
