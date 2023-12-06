@@ -65,7 +65,7 @@ items:
             io.kompose.service: clientcodefirst
         spec:
           containers:
-            - image: localhost:5000/clientcodefirst
+            - image: clientcodefirst
               name: clientcodefirst
               ports:
                 - containerPort: 5091
