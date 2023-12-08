@@ -63,7 +63,7 @@ items:
         spec:
           containers:
             - name: clientcodefirst
-              image: localhost:6000/clientcodefirst
+              image: localhost:5000/clientcodefirst
               ports:
                 - containerPort: 5091
 
