@@ -91,6 +91,10 @@ items:
                   value: clientcodedb
                 - name: MYSQL_ROOT_PASSWORD
                   value: root
+                - name: MYSQL_PASSWORD
+                  value: admin
+                - name: MYSQL_USER
+                  value: userinfo
               ports:
                 - containerPort: 3306
 
