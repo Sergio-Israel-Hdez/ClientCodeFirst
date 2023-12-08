@@ -1,160 +1,92 @@
 apiVersion: v1
+kind: List
+metadata: {}
 items:
   - apiVersion: v1
     kind: Service
     metadata:
-      annotations:
-        kompose.cmd: kompose convert -o codefirts.yaml
-        kompose.version: 1.22.0 (955b78124)
-      creationTimestamp: null
+      name: clientcodefirst-service
       labels:
-        io.kompose.service: clientcodefirst
-      name: clientcodefirst
+        app: clientcodefirst
     spec:
       ports:
-        - name: "5091"
-          port: 5091
+        - port: 5091
           targetPort: 5091
       selector:
-        io.kompose.service: clientcodefirst
-    status:
-      loadBalancer: {}
+        app: clientcodefirst
+
   - apiVersion: v1
     kind: Service
     metadata:
-      annotations:
-        kompose.cmd: kompose convert -o codefirts.yaml
-        kompose.version: 1.22.0 (955b78124)
-      creationTimestamp: null
-      labels:
-        io.kompose.service: mysql
-      name: mysql
+      name: mysql-service
     spec:
       ports:
-        - name: "3309"
-          port: 3309
+        - port: 3311
           targetPort: 3306
       selector:
-        io.kompose.service: mysql
-    status:
-      loadBalancer: {}
+        app: mysql
+
   - apiVersion: apps/v1
     kind: Deployment
     metadata:
-      annotations:
-        kompose.cmd: kompose convert -o codefirts.yaml
-        kompose.version: 1.22.0 (955b78124)
-      creationTimestamp: null
-      labels:
-        io.kompose.service: clientcodefirst
-      name: clientcodefirst
+      name: clientcodefirst-deployment
     spec:
       replicas: 1
       selector:
         matchLabels:
-          io.kompose.service: clientcodefirst
-      strategy: {}
+          app: clientcodefirst
       template:
         metadata:
-          annotations:
-            kompose.cmd: kompose convert -o codefirts.yaml
-            kompose.version: 1.22.0 (955b78124)
-          creationTimestamp: null
           labels:
-            io.kompose.network/my-network-mysql: "true"
-            io.kompose.service: clientcodefirst
+            app: clientcodefirst
         spec:
           containers:
-            - image: localhost:6000/clientcodefirst
-              name: clientcodefirst
+            - name: clientcodefirst
+              image: localhost:6000/clientcodefirst
               ports:
                 - containerPort: 5091
-              resources: {}
-          restartPolicy: Always
-    status: {}
-  - apiVersion: networking.k8s.io/v1
-    kind: NetworkPolicy
-    metadata:
-      creationTimestamp: null
-      name: my-network-mysql
-    spec:
-      ingress:
-        - from:
-            - podSelector:
-                matchLabels:
-                  io.kompose.network/my-network-mysql: "true"
-      podSelector:
-        matchLabels:
-          io.kompose.network/my-network-mysql: "true"
+
   - apiVersion: apps/v1
     kind: Deployment
     metadata:
-      annotations:
-        kompose.cmd: kompose convert -o codefirts.yaml
-        kompose.version: 1.22.0 (955b78124)
-      creationTimestamp: null
-      labels:
-        io.kompose.service: mysql
-      name: mysql
+      name: mysql-deployment
     spec:
       replicas: 1
       selector:
         matchLabels:
-          io.kompose.service: mysql
+          app: mysql
       strategy:
         type: Recreate
       template:
         metadata:
-          annotations:
-            kompose.cmd: kompose convert -o codefirts.yaml
-            kompose.version: 1.22.0 (955b78124)
-          creationTimestamp: null
           labels:
-            io.kompose.network/my-network-mysql: "true"
-            io.kompose.service: mysql
+            app: mysql
         spec:
           containers:
-            - args:
-                - --default-authentication-plugin=mysql_native_password
+            - name: mysql
+              image: mysql
               env:
                 - name: MYSQL_DATABASE
                   value: clientcodedb
-                - name: MYSQL_PASSWORD
-                  value: admin
                 - name: MYSQL_ROOT_PASSWORD
                   value: root
-                - name: MYSQL_TCP_PORT
-                  value: "3306"
-                - name: MYSQL_USER
-                  value: userinfo
-              image: mysql/mysql-server
-              name: mysql
               ports:
                 - containerPort: 3306
-              resources: {}
               volumeMounts:
-                - mountPath: /var/lib/mysql
-                  name: mysql-data
-          restartPolicy: Always
+                - name: mysql-persistent-storage
+                  mountPath: /var/lib/mysql
           volumes:
-            - name: mysql-data
+            - name: mysql-persistent-storage
               persistentVolumeClaim:
-                claimName: mysql-data
-    status: {}
+                claimName: mysql-pv-claim
+
   - apiVersion: v1
     kind: PersistentVolumeClaim
     metadata:
-      creationTimestamp: null
-      labels:
-        io.kompose.service: mysql-data
-      name: mysql-data
+      name: mysql-pv-claim
     spec:
       accessModes:
         - ReadWriteOnce
       resources:
         requests:
           storage: 100Mi
-    status: {}
-kind: List
-metadata: {}
-
