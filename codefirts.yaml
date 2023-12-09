@@ -27,6 +27,7 @@
       labels:
         app: clientcodefirst
     spec:
+      type:
       ports:
         - port: 5091
           targetPort: 5091
@@ -38,9 +39,11 @@
     metadata:
       name: mysql-service
     spec:
+      type: NodePort
       ports:
         - port: 3311
           targetPort: 3306
+          nodePort: 30011
       selector:
         app: mysql
 ---
