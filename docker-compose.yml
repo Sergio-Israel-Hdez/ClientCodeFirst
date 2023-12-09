@@ -25,7 +25,7 @@
       image: localhost:5000/clientcodefirst:latest
       build:
         context: .
-        dockerfile: ClientCodeFirst/Dockerfile
+        dockerfile: ClientCodeFirst/Dockerfile-v2
       ports:
         - 5091:5091
       networks:

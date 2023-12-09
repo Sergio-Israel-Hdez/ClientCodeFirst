@@ -1,5 +1,5 @@
 
-  version: "3"
+  version: "3.8"
   services:
     mysql:
       image: mysql/mysql-server
@@ -17,16 +17,6 @@
         MYSQL_PASSWORD: admin
         MYSQL_TCP_PORT: 3306
         MYSQL_DATABASE: clientcodedb
-    clientcodefirst:
-      restart: always
-      image: clientcodefirst
-      build:
-        context: .
-        dockerfile: ClientCodeFirst/Dockerfile
-      ports:
-        - 5091:5091
-      networks:
-        - my-network-mysql
   networks:
     my-network-mysql:
   volumes:
