@@ -46,6 +46,18 @@
       selector:
         app: mysql
 ---
+    apiVersion: v1
+    kind: Service
+    metadata: 
+      name: mysql-external
+    spec:
+      type: NodePort 
+      ports:
+      - port: 3306
+        nodePort: 30007
+      selector:
+        app: mysql
+---
     apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -98,6 +110,10 @@
                   value: "1"
               ports:
                 - containerPort: 3306
+          volumes:
+            - name: config-volume
+              configMap:
+                name: mysql-config
 ---
     apiVersion: v1
     kind: PersistentVolumeClaim
@@ -109,3 +125,13 @@
       resources:
         requests:
           storage: 100Mi
+---
+    apiVersion: v1
+    kind: ConfigMap 
+    metadata:
+      name: mysql-config
+    data:
+      my.cnf: |
+        # Acá va sobrescrita la configuración personalizada
+        [mysqld]
+        bind-address=0.0.0.0
