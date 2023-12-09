@@ -92,6 +92,8 @@
                   value: admin
                 - name: MYSQL_USER
                   value: userinfo
+                - name: public_key_retrieval
+                  value: "1"
               ports:
                 - containerPort: 3306
 ---
