@@ -22,7 +22,7 @@
       depends_on:
         mysql:
           condition: service_started
-      image: localhost:5000/clientcodefirst
+      image: localhost:5000/clientcodefirst:latest
       build:
         context: .
         dockerfile: ClientCodeFirst/Dockerfile
