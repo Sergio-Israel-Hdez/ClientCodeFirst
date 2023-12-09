@@ -24,7 +24,7 @@ public partial class ClientcodedbContext : DbContext
 
     */
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseMySql("server=192.168.1.11;port=30011;user=root;password=root;database=clientcodedb", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.32-mysql"));
+        => optionsBuilder.UseMySql("server=192.168.1.11;port=3311;user=root;password=root;database=clientcodedb", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.32-mysql"));
     //se modifica
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
