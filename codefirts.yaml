@@ -27,7 +27,7 @@
       labels:
         app: clientcodefirst
     spec:
-      type:
+      type: LoadBalancer
       ports:
         - port: 5091
           targetPort: 5091
