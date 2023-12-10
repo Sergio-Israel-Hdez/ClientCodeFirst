@@ -75,4 +75,5 @@ spec:
     - protocol: TCP
       port: 3311
       targetPort: 3306
-  type: ClusterIP
+  type: LoadBalancer
+
