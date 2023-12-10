@@ -8,6 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="System.Data.SqlClient" Version="4.8.2"/>
+        <PackageReference Include="MySql.Data" Version="8.0.22"/>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.13" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0">
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

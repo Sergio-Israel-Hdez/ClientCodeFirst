@@ -29,5 +29,14 @@ spec:
       containers:
         - name: clientcodefirst
           image: localhost:5000/clientcodefirst
+          env:
+          - name: DBHOST
+            value: mysql-service
+          - name: MYSQL_USER
+            value: userinfo
+          - name: MYSQL_PASSWORD
+            value: admin
+          - name: MYSQL_DATABASE
+            value: clientcodedb
           ports:
             - containerPort: 5091
