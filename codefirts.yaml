@@ -92,8 +92,6 @@ spec:
               value: admin
             - name: MYSQL_USER
               value: userinfo
-            - name: public_key_retrieval
-              value: "0"
           ports:
             - containerPort: 3306
           command:
