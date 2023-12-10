@@ -1,97 +1,111 @@
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: mysql-pv
-spec:
-  capacity:
-    storage: 100Mi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/data"
----
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: standard
-provisioner: kubernetes.io/aws-ebs
-parameters:
-  type: gp2
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: clientcodefirst-service
-  labels:
-    app: clientcodefirst
-spec:
-  type:
-  ports:
-    - port: 5091
-      targetPort: 5091
-  selector:
-    app: clientcodefirst
 
 ---
-
-apiVersion: v1
-kind: Service
-metadata:
-name: mysql-service
-spec:
-type: ClusterIP
-selector:
-app: mysql
-ports:
-- name: mysql
-port: 3306
-targetPort: 3306
-
+    apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      name: mysql-pv
+    spec:
+      capacity:
+        storage: 100Mi
+      accessModes:
+        - ReadWriteOnce
+      hostPath:
+        path: "/data"
 ---
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: mysql-deployment
-spec:
-  replicas: 1
-  selector:
-   matchLabels:
-     app: mysql
-  template:
-   metadata:
-     labels:
-      app: mysql
-   spec:
-    containers:
-    - name: mysql
-      image: mysql:8.0.23
-      env:
-      - name: MYSQL_ROOT_PASSWORD
-        value: root
-      - name: MYSQL_DATABASE
-        value: clientcodedb
-      - name: MYSQL_PASSWORD
-        value: admin  
-      - name: MYSQL_USER
-        value: userinfo
+    apiVersion: storage.k8s.io/v1
+    kind: StorageClass
+    metadata:
+      name: standard
+    provisioner: kubernetes.io/aws-ebs
+    parameters:
+      type: gp2
+---
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: clientcodefirst-service
+      labels:
+        app: clientcodefirst
+    spec:
+      type:
       ports:
-      - containerPort: 3306
-        volumeMounts:
-        - name: mysql-persistent-storage
-          mountPath: /var/lib/mysql
-    volumes:
-     - name: mysql-persistent-storage
-       persistentVolumeClaim:
-       claimName: mysql-pvc
+        - port: 5091
+          targetPort: 5091
+      selector:
+        app: clientcodefirst
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mysql-pvc
-spec:
-  accessModes:
-   - ReadWriteOnce
-  resources:
-   requests:
-    storage: 1Gi
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: mysql-service
+    spec:
+      type: LoadBalancer
+      ports:
+        - port: 3311
+          targetPort: 3306
+      selector:
+        app: mysql
+---
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: clientcodefirst-deployment
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: clientcodefirst
+      template:
+        metadata:
+          labels:
+            app: clientcodefirst
+        spec:
+          containers:
+            - name: clientcodefirst
+              image: localhost:5000/clientcodefirst
+              ports:
+                - containerPort: 5091
+---
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: mysql-deployment
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: mysql
+      strategy:
+        type: Recreate
+      template:
+        metadata:
+          labels:
+            app: mysql
+        spec:
+          containers:
+            - name: mysql
+              image: mysql
+              env:
+                - name: MYSQL_DATABASE
+                  value: clientcodedb
+                - name: MYSQL_ROOT_PASSWORD
+                  value: root
+                - name: MYSQL_PASSWORD
+                  value: admin
+                - name: MYSQL_USER
+                  value: userinfo
+                - name: public_key_retrieval
+                  value: "1"
+              ports:
+                - containerPort: 3306
+---
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: mysql-pv-claim
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 100Mi
