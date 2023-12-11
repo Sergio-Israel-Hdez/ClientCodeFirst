@@ -10,20 +10,6 @@ namespace ClientCodeFirst.Controllers;
 public class ClienteController : ControllerBase
 {
 
-    private readonly string connString;
-    private readonly IConfiguration _configuration;
-    private readonly ILogger<ClienteController> _logger;
-    public ClienteController(IConfiguration configuration, ILogger<ClienteController> logger)
-    {
-        _logger = logger;
-        var host = _configuration["DBHOST"];
-        var port = _configuration["DBPORT"];
-        var password = _configuration["MYSQL_PASSWORD"];
-        var userid = _configuration["MYSQL_USER"];
-        var usersDataBase = _configuration["MYSQL_DATABASE"];
-
-        connString = $"server={host}; userid={userid};pwd={password};port={port};database={usersDataBase}";
-    }
     [HttpGet]
     [Route("[action]")]
     public IEnumerable<Cliente> GetAll()
@@ -37,6 +23,7 @@ public class ClienteController : ControllerBase
     [Route("[action]")]
     public IEnumerable<Cliente> GetAllMySql()
     {
+        string connString = "server=mysql-service; userid=userinfo;pwd=admin;port=3311;database=clientcodedb";
         List<Cliente> clientes = new List<Cliente>();
         using (var conn = new MySqlConnection(connString))
         {
