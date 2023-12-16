@@ -8,7 +8,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/path/to/host/directory"
+    path: "/home/sergio/volume_k8s/"
 
 ---
 
