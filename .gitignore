@@ -10,3 +10,5 @@
 .idea/.idea.ClientCodeFirst/.idea/shelf/Uncommitted_changes_before_Update_at_6_12_23_11_46_[Changes]1/ClientCodeFirst.assets.cache
 .idea/.idea.ClientCodeFirst/.idea/shelf/Uncommitted_changes_before_Update_at_6_12_23_11_46_[Changes]1/project.nuget.cache
 .idea/.idea.ClientCodeFirst/.idea/shelf/Uncommitted_changes_before_Update_at_6_12_23_11_46_[Changes]1/shelved.patch
+./mysql-secret.yaml
+mysql-secret.yaml
