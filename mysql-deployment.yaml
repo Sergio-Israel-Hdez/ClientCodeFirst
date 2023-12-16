@@ -8,7 +8,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/home/sergio/volume_k8s/"
+    path: "/home/sergio/volume_k8s"
     type: DirectoryOrCreate
 
 ---
@@ -69,7 +69,6 @@ spec:
       volumeMounts:
         - name: mysql-persistent-storage
           mountPath: /var/lib/mysql
-
   volumes:
     - name: mysql-persistent-storage
       persistentVolumeClaim:
