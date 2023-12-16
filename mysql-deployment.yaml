@@ -8,7 +8,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/path/to/host/directory"
+    path: "/home/sergio/volume_k8s/"
 
 ---
 
@@ -44,13 +44,25 @@ spec:
           image: mysql:8.0
           env:
             - name: MYSQL_ROOT_PASSWORD
-              value: root
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: mysql-root-password
             - name: MYSQL_DATABASE
-              value: clientcodedb
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: mysql-database
             - name: MYSQL_USER
-              value: userinfo
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: mysql-user
             - name: MYSQL_PASSWORD
-              value: admin
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: mysql-password
           ports:
             - containerPort: 3306
       volumeMounts:
