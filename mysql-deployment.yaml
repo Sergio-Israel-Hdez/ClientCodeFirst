@@ -41,7 +41,7 @@ spec:
   template:
     metadata:
       labels:
-        app: mysql
+        app: mysql-deployment
     spec:
       containers:
       - image: mysql:8.0
