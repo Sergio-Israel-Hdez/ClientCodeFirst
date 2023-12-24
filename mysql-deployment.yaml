@@ -47,28 +47,28 @@ spec:
       - image: mysql:8.0
         name: mysql
         env:
-            - name: MYSQL_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: mysql-root-password
-            - name: MYSQL_DATABASE
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: mysql-database
-            - name: MYSQL_USER
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: mysql-user
-            - name: MYSQL_PASSWORD
-              valueFrom:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: mysql-root-password
+          - name: MYSQL_DATABASE
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: mysql-database
+          - name: MYSQL_USER
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: mysql-user
+          - name: MYSQL_PASSWORD
+            valueFrom:
                 secretKeyRef:
                   name: mysql-secret
                   key: mysql-password
-            - name: MYSQL_DATADIR  
-              value: /var/lib/mysql
+          - name: MYSQL_DATADIR  
+            value: /var/lib/mysql
         ports:
         - containerPort: 3306
           name: mysql
