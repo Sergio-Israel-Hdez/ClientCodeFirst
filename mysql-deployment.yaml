@@ -68,7 +68,7 @@ spec:
                   name: mysql-secret
                   key: mysql-password
             - name: MYSQL_DATADIR  
-              value: /data/mysql
+              value: /var/lib/mysql
         ports:
         - containerPort: 3306
           name: mysql
