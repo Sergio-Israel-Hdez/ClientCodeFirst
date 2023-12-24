@@ -5,21 +5,23 @@ metadata:
 spec:
   capacity:
     storage: 1Gi
-  accessModes:
+  accessModes: 
     - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: mysql
   hostPath:
-    path: "/home/sergio/volume_k8s"
-    type: DirectoryOrCreate
+    path: /home/sergio/volume_k8s
 
 ---
 
-apiVersion: v1
+apiVersion: v1    
 kind: PersistentVolumeClaim
 metadata:
   name: mysql-pvc
 spec:
   accessModes:
     - ReadWriteOnce
+  storageClassName: mysql
   resources:
     requests:
       storage: 1Gi
@@ -28,52 +30,52 @@ spec:
 
 apiVersion: apps/v1
 kind: Deployment
-metadata:
-  name: mysql-deployment
+metadata:  
+  name: mysql
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: mysql
+  strategy:
+    type: Recreate  
   template:
     metadata:
       labels:
         app: mysql
     spec:
       containers:
-        - name: mysql
-          image: mysql:8.0
-          env:
-            - name: MYSQL_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: mysql-root-password
-            - name: MYSQL_DATABASE
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: mysql-database
-            - name: MYSQL_USER
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: mysql-user
-            - name: MYSQL_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: mysql-password
-          ports:
-            - containerPort: 3306
-      volumeMounts:
+      - image: mysql:8.0
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: mysql-root-password  
+        - name: MYSQL_DATABASE
+          value: mydb
+        - name: MYSQL_USER
+          valueFrom:  
+            secretKeyRef:
+              name: mysql-secret
+              key: mysql-user   
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret  
+              key: mysql-password
+        - name: MYSQL_DATADIR  
+          value: /data/mysql
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
         - name: mysql-persistent-storage
           mountPath: /var/lib/mysql
-  volumes:
-    - name: mysql-persistent-storage
-      persistentVolumeClaim:
-        claimName: mysql-pvc
-
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-pvc
 ---
 
 apiVersion: v1
