@@ -5,7 +5,7 @@ metadata:
   labels:
     app: clientcodefirst
 spec:
-  type: LoadBalancer  # Cambiado a NodePort para exponer la API
+  type: LoadBalancer  # Cambiado a NodePort o LoadBalancer para exponer la API
   ports:
     - port: 5091
       targetPort: 5091

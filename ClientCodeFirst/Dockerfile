@@ -14,6 +14,9 @@ WORKDIR /src
 COPY . .
 RUN dotnet publish -c Release -o /app
 
+# Etiqueta de la imagen final
+LABEL stage=build
+
 # Etapa de ejecución
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 
 WORKDIR /app
