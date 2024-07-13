@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
         - name: clientcodefirst
-          image: localhost:5000/clientcodefirst
+          image: h2k2/clientcodefirst
           env:
           - name: DBHOST
             value: mysql-service
