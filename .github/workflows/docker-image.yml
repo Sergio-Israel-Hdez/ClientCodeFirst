@@ -27,7 +27,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .  # ruta al contexto de la construcción (directorio con Dockerfile)
-          file: ./Dockerfile  # ruta al Dockerfile
+          file: ./ClientCodeFirst/Dockerfile  # ruta al Dockerfile
           push: true
           tags: |
             h2k2/clientcodefirst
