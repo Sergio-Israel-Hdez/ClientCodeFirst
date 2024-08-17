@@ -30,4 +30,5 @@ jobs:
           file: ./ClientCodeFirst/Dockerfile-v2  # ruta al Dockerfile
           push: true
           tags: |
-              h2k2/clientecodefirst:${{github.sha}}
+            	h2k2/clientcodefirst:latest
+              h2k2/clientcodefirst:${{github.sha}}
