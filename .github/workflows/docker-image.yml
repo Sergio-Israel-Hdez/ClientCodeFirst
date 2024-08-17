@@ -31,3 +31,4 @@ jobs:
           push: true
           tags: |
               h2k2/clientcodefirst:${{github.sha}}
+              h2k2/clientcodefirst:latest
