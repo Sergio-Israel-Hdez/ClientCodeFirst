@@ -29,6 +29,5 @@ jobs:
           context: .  # ruta al contexto de la construcción (directorio con Dockerfile)
           file: ./ClientCodeFirst/Dockerfile-v2  # ruta al Dockerfile
           push: true
-          tag_with_ref: true
-          tag_with_sha: true
-          tags: ${{ github.sha }}
+          tags: |
+              h2k/clientecodefirst:${{github.sha}}
