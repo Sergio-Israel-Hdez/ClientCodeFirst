@@ -10,7 +10,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: mysql
   hostPath:
-    path: /home/sergio/volume_k8s/mysql-codefirst
+    path: C:\volume_k8s\mysql-codefirst
 
 ---
 

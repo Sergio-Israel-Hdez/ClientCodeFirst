@@ -9,11 +9,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		codefirts.yaml = codefirts.yaml
 		docker-compose.yml = docker-compose.yml
+		D:\Manajaro\Documentos\DotNet\ClientCodeFirst\mysql-secret.yaml = D:\Manajaro\Documentos\DotNet\ClientCodeFirst\mysql-secret.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución", "Elementos de la solución", "{6CB164F4-7058-42EE-9E52-F36FAEDACB8F}"
 	ProjectSection(SolutionItems) = preProject
 		codefirst-deployment.yaml = codefirst-deployment.yaml
+		mysql-deployment.yaml = mysql-deployment.yaml
 	EndProjectSection
 EndProject
 Global
@@ -29,5 +31,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0A3DC025-6D71-44F2-8084-E86196381A1E}
 	EndGlobalSection
 EndGlobal
