@@ -66,15 +66,15 @@ public class ClienteController : ControllerBase
             return _context.Clientes.ToList();
         }
     }
-    [HttpGet]
-    [Route("[action]")]
-    public IEnumerable<Cliente> GetAllJulio()
-    {
-        using (var _context = new ClientcodedbContext())
-        {
-            return _context.Clientes.ToList();
-        }
-    }
+    //[HttpGet]
+    //[Route("[action]")]
+    //public IEnumerable<Cliente> GetAllJulio()
+    //{
+    //    using (var _context = new ClientcodedbContext())
+    //    {
+    //        return _context.Clientes.ToList();
+    //    }
+    //}
     [HttpGet]
     [Route("[action]")]
     public IEnumerable<Cliente> GetAllJulio2()
