@@ -57,33 +57,33 @@ public class ClienteController : ControllerBase
             _context.SaveChanges();
         }
     }
-    //[HttpGet]
-    //[Route("[action]")]
-    //public IEnumerable<Cliente> GetAllFeb()
-    //{
-    //    using (var _context = new ClientcodedbContext())
-    //    {
-    //        return _context.Clientes.ToList();
-    //    }
-    //}
-    //[HttpGet]
-    //[Route("[action]")]
-    //public IEnumerable<Cliente> GetAllJulio()
-    //{
-    //    using (var _context = new ClientcodedbContext())
-    //    {
-    //        return _context.Clientes.ToList();
-    //    }
-    //}
-    //[HttpGet]
-    //[Route("[action]")]
-    //public IEnumerable<Cliente> GetAllJulio2()
-    //{
-    //    using (var _context = new ClientcodedbContext())
-    //    {
-    //        return _context.Clientes.ToList();
-    //    }
-    //}
+    [HttpGet]
+    [Route("[action]")]
+    public IEnumerable<Cliente> GetAllFeb()
+    {
+        using (var _context = new ClientcodedbContext())
+        {
+            return _context.Clientes.ToList();
+        }
+    }
+    [HttpGet]
+    [Route("[action]")]
+    public IEnumerable<Cliente> GetAllJulio()
+    {
+        using (var _context = new ClientcodedbContext())
+        {
+            return _context.Clientes.ToList();
+        }
+    }
+    [HttpGet]
+    [Route("[action]")]
+    public IEnumerable<Cliente> GetAllJulio2()
+    {
+        using (var _context = new ClientcodedbContext())
+        {
+            return _context.Clientes.ToList();
+        }
+    }
     [HttpGet]
     [Route("[action]")]
     public string SayHello()
