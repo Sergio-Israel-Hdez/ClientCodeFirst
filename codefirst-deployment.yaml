@@ -29,7 +29,6 @@ spec:
       containers:
         - name: clientcodefirst
           image: h2k2/clientcodefirst:latest
-          imagePullPolicy: Always
           env:
           - name: DBHOST
             value: mysql-service
