@@ -84,10 +84,10 @@ public class ClienteController : ControllerBase
             return _context.Clientes.ToList();
         }
     }
-    //[HttpGet]
-    //[Route("[action]")]
-    //public string SayHello()
-    //{
-    //    return "hola este es un nuevo endpoint";
-    //}
+    [HttpGet]
+    [Route("[action]")]
+    public string SayHello()
+    {
+        return "hola este es un nuevo endpoint";
+    }
 }
