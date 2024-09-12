@@ -16,19 +16,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: clientcodefirst-deployment
-  annotations:
-    # Esta anotación es agregada para actualizar las replicassets 
-    kubertenes.io/change-cause: "Deshabilitar endpoints de Julio"
+  # annotations:
+  #   # Esta anotación es agregada para actualizar las replicassets 
+  #   kubertenes.io/change-cause: "Deshabilitar endpoints de Julio"
 spec:
   replicas: 2
   selector:
     matchLabels:
       app: clientcodefirst
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0
   template:
     metadata:
       labels:
