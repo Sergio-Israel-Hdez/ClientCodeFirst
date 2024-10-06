@@ -57,4 +57,33 @@ public class ClienteController : ControllerBase
             _context.SaveChanges();
         }
     }
+    [HttpGet]
+    [Route("[action]")]
+    public IEnumerable<Cliente> GetAllMySql2()
+    {
+        string connString = "server=mysql-service; userid=userinfo;pwd=admin;port=3311;database=clientcodedb";
+        List<Cliente> clientes = new List<Cliente>();
+        using (var conn = new MySqlConnection(connString))
+        {
+            conn.Open();
+            using (var cmd = new MySqlCommand("select * from Cliente", conn))
+            {
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Cliente cliente = new Cliente()
+                        {
+                            IdCliente = (int)reader["IdCliente"],
+                            Nombre = (string)reader["Nombre"],
+                            CorreoElectronico = (string)reader["CorreoElectronico"],
+                            Telefono = (string)reader["Telefono"]
+                        };
+                        clientes.Add(cliente);
+                    }
+                }
+            }
+        }
+        return clientes.AsEnumerable();
+    }
 }

@@ -27,7 +27,7 @@ spec:
         app: clientcodefirst
       annotations:
         # Cambia este valor en cada despliegue para forzar la actualización
-        deployment.kubernetes.io/revision: "2"  # Modifica este valor para cada despliegue
+        deployment.kubernetes.io/revision: "3"  # Modifica este valor para cada despliegue
     spec:
       containers:
         - name: clientcodefirst
