@@ -96,4 +96,10 @@ public class ClienteController : ControllerBase
     {
         return "hola este es un nuevo endpoint SayHello2";
     }
+    [HttpGet]
+    [Route("[action]")]
+    public string SayHello3()
+    {
+        return "hola este es un nuevo endpoint SayHello3";
+    }
 }

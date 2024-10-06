@@ -16,9 +16,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: clientcodefirst-deployment
-  annotations:
-    # Esta anotación es agregada para describir el cambio
-    kubertenes.io/change-cause: "se habilita endpoints de Julio"
 spec:
   replicas: 2
   selector:
@@ -31,7 +28,7 @@ spec:
     spec:
       containers:
         - name: clientcodefirst
-          image: h2k2/clientcodefirst:latest
+          image: h2k2/clientcodefirst:${{github.sha}}
           imagePullPolicy: Always
           env:
           - name: DBHOST
