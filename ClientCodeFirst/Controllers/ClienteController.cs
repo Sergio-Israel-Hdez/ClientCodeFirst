@@ -59,53 +59,8 @@ public class ClienteController : ControllerBase
     }
     [HttpGet]
     [Route("[action]")]
-    public IEnumerable<Cliente> GetAllFeb()
+    public string hola1()
     {
-        using (var _context = new ClientcodedbContext())
-        {
-            return _context.Clientes.ToList();
-        }
-    }
-    [HttpGet]
-    [Route("[action]")]
-    public IEnumerable<Cliente> GetAllJulio()
-    {
-        using (var _context = new ClientcodedbContext())
-        {
-            return _context.Clientes.ToList();
-        }
-    }
-    [HttpGet]
-    [Route("[action]")]
-    public IEnumerable<Cliente> GetAllJulio2()
-    {
-        using (var _context = new ClientcodedbContext())
-        {
-            return _context.Clientes.ToList();
-        }
-    }
-    [HttpGet]
-    [Route("[action]")]
-    public string SayHello()
-    {
-        return "hola este es un nuevo endpoint";
-    }
-    [HttpGet]
-    [Route("[action]")]
-    public string SayHello2()
-    {
-        return "hola este es un nuevo endpoint SayHello2";
-    }
-    [HttpGet]
-    [Route("[action]")]
-    public string SayHello3()
-    {
-        return "hola este es un nuevo endpoint SayHello3";
-    }
-    [HttpGet]
-    [Route("[action]")]
-    public string SayHello4()
-    {
-        return "hola este es un nuevo endpoint SayHello4";
+        return "hola este es un nuevo endpoint hola1";
     }
 }
