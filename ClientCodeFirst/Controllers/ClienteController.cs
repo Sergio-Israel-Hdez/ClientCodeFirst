@@ -57,11 +57,4 @@ public class ClienteController : ControllerBase
             _context.SaveChanges();
         }
     }
-    
-    [HttpGet]
-    [Route("[action]")]
-    public string hola5()
-    {
-        return "hola este es un nuevo endpoint hola5";
-    }
 }
