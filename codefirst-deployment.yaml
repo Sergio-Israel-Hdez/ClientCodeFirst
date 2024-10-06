@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
         - name: clientcodefirst
-          image: h2k2/clientcodefirst:latest
+          image: h2k2/clientcodefirst
           imagePullPolicy: Always
           env:
           - name: DBHOST
